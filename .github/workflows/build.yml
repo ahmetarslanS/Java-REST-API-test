@@ -7,14 +7,14 @@ on:
 
 jobs:
   build-and-dockerize:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Build and package JAR
-      run: ./mvnw package -DskipTests
+      run: .mvnw.cmd package -DskipTests
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
