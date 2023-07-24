@@ -1,24 +1,15 @@
-#Stage 1 Paketlemek için JAVA JAR
-FROM openjdk:11-jdk as builder
-
-WORKDIR /MessengerApp
-
-ENV JAVA_HOME="C:\Program Files\Java"
-
-COPY .mvn .mvn
-COPY mvnw pom.xml ./
-RUN powershell -Command "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; C:\Program Files (x86)\MessengerApp\MessengerApp\mvnw.cmd dependency:go-offline"
-
-
-COPY src src
-RUN ./mvnw package -DskipTests
-
-#Stage 2 Çalıştırmak için  OpenJDK JRE
+# Use an official OpenJDK runtime as the base image
 FROM openjdk:11-jre-slim
 
+# Set the working directory inside the container
 WORKDIR /app
 
-COPY --from=builder /app/target/MessengerApp-*.jar /app/messenger-app.jar
+# Copy the JAR file and pom.xml to the working directory
+COPY target/*.jar /app/app.jar
+COPY pom.xml /app/pom.xml
 
-#Uygulamayı çalıştır
-CMD ["java", "-jar", "messenger-app.jar"]
+# Expose the port that your Spring Boot application listens on
+EXPOSE 8080
+
+# Run the Java application when the container starts
+CMD ["java", "-jar", "app.jar"]
