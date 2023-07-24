@@ -20,7 +20,10 @@ jobs:
       run: cmd /c "mvnw.cmd clean install -U"
 
     - name: Set up Docker Buildx
-      run: docker buildx create --use --name mybuilder
+      run:  |
+        docker buildx create --name mybuilder
+        docker buildx use mybuilder
+      
 
     - name: Build Docker image
       run: docker buildx build --file Dockerfile --tag ahmetarslann/messenger-app:latest --push .
