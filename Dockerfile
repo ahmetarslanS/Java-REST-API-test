@@ -1,7 +1,7 @@
 #Stage 1 Paketlemek için JAVA JAR
 FROM openjdk:11-jdk as builder
 
-WORKDIR /app
+WORKDIR /MessengerApp
 
 ENV JAVA_HOME="C:\Program Files\Java"
 
