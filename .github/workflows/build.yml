@@ -31,7 +31,7 @@ jobs:
           JAVA_HOME: C:\hostedtoolcache\windows\Java_Adopt_jdk\11.0.19-7\x64
 
       - name: Log in to Docker Hub
-        run: docker login -u ${{ env.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+        run: docker login -u ${{ env.DOCKER_HUB_USERNAME }} --password-stdin
 
       - name: Build and push Docker image
         run: |
