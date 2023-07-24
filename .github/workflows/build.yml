@@ -16,6 +16,9 @@ jobs:
     - name: Build and package JAR
       run: cmd /c "mvnw.cmd package -DskipTests"
 
+    - name: Run Maven with -U flag to update dependencies
+      run: cmd /c "mvnw.cmd clean install -U"
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
