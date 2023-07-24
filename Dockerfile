@@ -7,7 +7,7 @@ ENV JAVA_HOME="C:\Program Files\Java"
 
 COPY .mvn .mvn
 COPY mvnw pom.xml ./
-RUN powershell -Command $ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; "C:\Program Files (x86)\MessengerApp\MessengerApp\mvnw.cmd" dependency:go-offline
+RUN powershell -Command "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; C:\Program Files (x86)\MessengerApp\MessengerApp\mvnw.cmd dependency:go-offline"
 
 
 COPY src src
