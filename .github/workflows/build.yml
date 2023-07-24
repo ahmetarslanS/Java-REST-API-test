@@ -19,9 +19,11 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
+      - name: Give execute permission to mvnw
+        run: chmod +x mvnw  # Give execution permission to mvnw
+
       - name: Build with Maven
-        run: |
-          ./mvnw package  # Use 'mvnw' for Linux
+        run: ./mvnw package  # Use 'mvnw' for Linux
         env:
           JAVA_HOME: /usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
           
