@@ -12,6 +12,9 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+    - name: Set up Java
+      run: |
+        echo "JAVA_HOME=C:\Program Files\Java" >> $GITHUB_ENV
 
     - name: Build and package JAR
       run: cmd /c "mvnw.cmd package -DskipTests"
