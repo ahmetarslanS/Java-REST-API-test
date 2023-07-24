@@ -14,23 +14,19 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build and package JAR
-      run: mvnw package -DskipTests
-
-
+      run: cmd /c "mvnw.cmd package -DskipTests"
 
     - name: Run Maven with -U flag to update dependencies
       run: cmd /c "mvnw.cmd clean install -U"
-      
-      
-    - name: Set up Docker CLI
-      uses: docker/setup-docker@v1
+
+    - name: Set up Docker Buildx
+      run: docker buildx create --use --name mybuilder
 
     - name: Build Docker image
-      run: docker build --file Dockerfile --tag ahmetarslann/messenger-app:latest .
+      run: docker buildx build --file Dockerfile --tag ahmetarslann/messenger-app:latest --push .
 
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-
+      
     - name: Push Docker image to Docker Hub
       run: docker push ahmetarslann/messenger-app:latest
-
