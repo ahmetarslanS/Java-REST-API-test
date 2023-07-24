@@ -19,12 +19,8 @@ jobs:
     - name: Run Maven with -U flag to update dependencies
       run: cmd /c "mvnw.cmd clean install -U"
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
-      
-
     - name: Build Docker image
-      run: docker buildx build --file Dockerfile --tag ahmetarslann/messenger-app:latest .
+      run: docker build --file Dockerfile --tag ahmetarslann/messenger-app:latest .
 
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
