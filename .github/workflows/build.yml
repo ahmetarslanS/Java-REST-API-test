@@ -7,7 +7,7 @@ on:
 
 jobs:
   build_and_push:
-    runs-on: windows-latest   # Use Windows runner
+    runs-on: ubuntu-latest   # Use Linux runner
 
     steps:
       - name: Checkout the repository
@@ -21,9 +21,9 @@ jobs:
 
       - name: Build with Maven
         run: |
-          ./mvnw.cmd package  # Use 'mvnw.cmd' for Windows
+          ./mvnw package  # Use 'mvnw' for Linux
         env:
-          JAVA_HOME: C:\hostedtoolcache\windows\Java_Adopt_jdk\11.0.19-7\x64
+          JAVA_HOME: /usr/lib/jvm/adoptopenjdk-11-hotspot-amd64
           
       - name: Build and Push Docker Image to Docker Hub
         uses: mr-smithers-excellent/docker-build-push@v5
@@ -32,5 +32,5 @@ jobs:
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          platform: windows/amd64
+          platform: linux/amd64
           tags: latest
