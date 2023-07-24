@@ -24,7 +24,7 @@ jobs:
       
 
     - name: Build Docker image
-      run: docker buildx build --file Dockerfile --tag ahmetarslann/messenger-app:latest
+      run: docker buildx build --file Dockerfile --tag ahmetarslann/messenger-app:latest .
 
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
