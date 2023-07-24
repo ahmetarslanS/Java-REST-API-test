@@ -25,7 +25,10 @@ jobs:
           java-version: '11'
 
       - name: Build with Maven
-        run: mvnw.cmd package  # Use 'mvnw.cmd' for Windows
+        run: |
+          ./mvnw.cmd package  # Use 'mvnw.cmd' for Windows
+        env:
+          JAVA_HOME: C:\hostedtoolcache\windows\Java_Adopt_jdk\11.0.19-7\x64
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
