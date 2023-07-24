@@ -42,7 +42,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11</version>
+				<version>3.11.0</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -50,5 +50,18 @@
 			</plugin>
 		</plugins>
 	</build>
+  
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>plexus.snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/plexus-snapshots</url>
+    </repository>
+  </repositories>
 
 </project>
