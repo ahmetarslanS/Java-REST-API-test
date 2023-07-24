@@ -3,9 +3,12 @@ FROM openjdk:11-jdk as builder
 
 WORKDIR /app
 
+ENV JAVA_HOME="C:\Program Files\Java"
+
 COPY .mvn .mvn
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+RUN powershell -Command $ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue'; C:\path\to\your\project\mvnw.cmd dependency:go-offline
+
 
 COPY src src
 RUN ./mvnw package -DskipTests
