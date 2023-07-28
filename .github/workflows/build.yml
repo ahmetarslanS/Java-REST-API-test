@@ -33,6 +33,6 @@ jobs:
           image: ahmetarslann/messenger-app
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           platform: linux/amd64
           tags: latest
