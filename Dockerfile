@@ -1,21 +1,15 @@
-#Stage 1 Paketlemek için JAVA JAR
-FROM openjdk:11-jdk as builder
+# Use an official OpenJDK runtime as the base image
+FROM adoptopenjdk:11-jre-hotspot
 
+# Set the working directory inside the container
 WORKDIR /app
 
-COPY .mvn .mvn
-COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
+# Copy the JAR file and pom.xml to the working directory
+COPY target/*.jar /app/app.jar
+COPY pom.xml /app/pom.xml
 
-COPY src src
-RUN ./mvnw package -DskipTests
+# Expose the port that your Spring Boot application listens on
+EXPOSE 8080
 
-#Stage 2 Çalıştırmak için  OpenJDK JRE
-FROM openjdk:11-jre-slim
-
-WORKDIR /app
-
-COPY --from=builder /app/target/MessengerApp-*.jar /app/messenger-app.jar
-
-#Uygulamayı çalıştır
-CMD ["java", "-jar", "messenger-app.jar"]
+# Run the Java application when the container starts
+CMD ["java", "-jar", "app.jar"]
