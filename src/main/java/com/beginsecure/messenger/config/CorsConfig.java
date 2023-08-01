@@ -10,7 +10,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // Allow all endpoints to have CORS enabled
-                .allowedOrigins("*") // Replace "*" with specific origins if needed
+                .allowedOriginPatterns("*") // Replace "*" with specific origins if needed
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true)
