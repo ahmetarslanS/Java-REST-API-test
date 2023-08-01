@@ -20,9 +20,9 @@ public class MessengerAppApplication {
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
-		config.addAllowedOrigin("http://34.141.115.209"); // Replace "*" with the specific origin of your website
-		config.addAllowedMethod("http://34.141.115.209");
-		config.addAllowedHeader("http://34.141.115.209");
+		config.addAllowedOrigin("*"); // Replace "*" with the specific origin of your website
+		config.addAllowedMethod("*");
+		config.addAllowedHeader("*");
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
