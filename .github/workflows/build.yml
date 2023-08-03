@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build, Test, and Push Docker Image
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
 
 jobs:
   build_and_push:
-    runs-on: ubuntu-latest   # Use Linux runner
+    name: Build, Test, and Push
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout the repository
@@ -23,9 +24,18 @@ jobs:
         run: chmod +x mvnw  # Give execution permission to mvnw
 
       - name: Build with Maven
-        run: ./mvnw package  # Use 'mvnw' for Linux
+        run: ./mvnw clean package  # Use 'mvnw' for Linux
         env:
           JAVA_HOME: ${{ env.JAVA_HOME }}  # Use the environment-provided JAVA_HOME
+
+      - name: Run Tests
+        run: ./mvnw test  # Use 'mvnw' for Linux
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build and Push Docker Image to Docker Hub
         uses: mr-smithers-excellent/docker-build-push@v5
