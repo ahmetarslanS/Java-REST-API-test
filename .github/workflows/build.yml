@@ -50,17 +50,7 @@ jobs:
         with:
           name: api-test-results
           path: api-test-results.jtl
-
-      - name: Run JMeter Tests - View Test Results.jmx
-        run: jmeter -n -t 'View Test Results.jmx' -l view-test-results.jtl
-
-      - name: Upload View Test Results
-        uses: actions/upload-artifact@v2
-        with:
-          name: view-test-results
-          path: view-test-results.jtl
         
-
       - name: Build and Push Docker Image to Docker Hub
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
