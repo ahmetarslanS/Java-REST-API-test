@@ -37,18 +37,23 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Run JMeter Tests
-        run: |
-          jmeter -n -t APITest.jmx -l test-results.jtl
+      - name: Run JMeter Tests - APITest.jmx
+        run: jmeter -n -t APITest.jmx -l api-test-results.jtl
 
-      - name: Upload Test Results
+      - name: Upload API Test Results
         uses: actions/upload-artifact@v2
         with:
-          name: test-results
-          path: test-results.jtl
+          name: api-test-results
+          path: api-test-results.jtl
 
-      - name: Upload Test Results
-        uses: actions/upload-artifact
+      - name: Run JMeter Tests - View Test Results.jmx
+        run: jmeter -n -t 'View Test Results.jmx' -l view-test-results.jtl
+
+      - name: Upload View Test Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: view-test-results
+          path: view-test-results.jtl
         
 
       - name: Build and Push Docker Image to Docker Hub
