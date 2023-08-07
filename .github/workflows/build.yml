@@ -44,15 +44,18 @@ jobs:
           
       - name: Run JMeter Tests - APITest.jmx
         run: |
-          cd ${{ github.workspace }}/src  # Move to the src directory where the JMeter test plans are located
           jmeter -n -t APITest.jmx -l api-test-results.jtl
-
+          # Convert JTL to CSV using JMeter's JTL processing tool
+          jmeter -g api-test-results.jtl -o jtl-converted-csv
+          # Append the CSV results to test_results.csv
+          cat jtl-converted-csv/test_results.csv >> test_results.csv
+        working-directory: ${{ github.workspace }}
 
       - name: Upload API Test Results
         uses: actions/upload-artifact@v2
         with:
           name: api-test-results
-          path: src/api-test-results.jtl  # Update the path accordingly
+          path: api-test-results.jtl
 
         
       - name: Build and Push Docker Image to Docker Hub
