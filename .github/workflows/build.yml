@@ -37,6 +37,12 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+          
+      - name: Install JMeter
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jmeter
+
       - name: Run JMeter Tests
         run: |
           # Navigate to your JMeter scripts directory
