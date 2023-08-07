@@ -39,7 +39,7 @@ jobs:
 
       - name: Run JMeter Tests
         run: |
-        jmeter -n -t APITest.jmx -l test-results.jtl
+          jmeter -n -t APITest.jmx -l test-results.jtl
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v2
