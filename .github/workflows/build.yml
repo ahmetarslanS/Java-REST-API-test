@@ -20,6 +20,11 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
+      - name: Install JMeter
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jmeter
+
       - name: Give execute permission to mvnw
         run: chmod +x mvnw  # Give execution permission to mvnw
 
