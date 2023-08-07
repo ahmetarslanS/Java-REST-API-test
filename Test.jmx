@@ -205,6 +205,15 @@
         <stringProp name="filename">C:\Users\samsung\Desktop\Masaüstü\apache-jmeter-5.6.2\bin\jmeter-tests\test-results.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
+      <ResultSaver guiclass="ResultSaverGui" testclass="ResultSaver" testname="test_results" enabled="true">
+        <stringProp name="FileSaver.filename">response_${__threadNum}_${__time}</stringProp>
+        <boolProp name="FileSaver.errorsonly">false</boolProp>
+        <boolProp name="FileSaver.successonly">false</boolProp>
+        <boolProp name="FileSaver.skipsuffix">false</boolProp>
+        <boolProp name="FileSaver.skipautonumber">false</boolProp>
+        <boolProp name="FileSaver.addTimstamp">true</boolProp>
+      </ResultSaver>
+      <hashTree/>
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
