@@ -56,6 +56,16 @@ jobs:
           name: api-test-results
           path: api-test-results.jtl
 
+      - name: Run JMeter Tests
+      - uses: rbhadti94/apache-jmeter-action@v0.5.0
+        with:
+          outputReportsFolder: reports/
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: jmeter-test-results
+          path: reports/
+      
       - name: Build and Push Docker Image to Docker Hub
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
