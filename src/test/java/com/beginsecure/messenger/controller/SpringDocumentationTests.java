@@ -24,3 +24,4 @@ public class SpringDocumentationTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.paths").exists());
     }
 }
+
