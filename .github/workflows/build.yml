@@ -44,12 +44,13 @@ jobs:
           
       - name: Run JMeter Tests - APITest.jmx
         run: |
-          jmeter -n -t APITest.jmx -l api-test-results.jtl
-          # Convert JTL to CSV using JMeter's JTL processing tool
+          jmeter -Djava.awt.headless=true -n -t APITest.jmx -l api-test-results.jtl
+          # Convert JTL to CSV
           jmeter -g api-test-results.jtl -o jtl-converted-csv
           # Append the CSV results to test_results.csv
           cat jtl-converted-csv/test_results.csv >> test_results.csv
         working-directory: ${{ github.workspace }}
+
 
       - name: Upload API Test Results
         uses: actions/upload-artifact@v2
