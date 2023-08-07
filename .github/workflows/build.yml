@@ -20,11 +20,6 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Install JMeter
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jmeter
-
       - name: Give execute permission to mvnw
         run: chmod +x mvnw  # Give execution permission to mvnw
 
@@ -41,20 +36,27 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
           
-      - name: Run JMeter Tests - APITest.jmx
+      - name: Install JMeter
         run: |
-          cd ${{ github.workspace }}/src  # Move to the src directory where the JMeter test plans are located
-          jmeter -n -t APITest.jmx -l api-test-results.jtl
+          sudo apt-get update
+          sudo apt-get install -y jmeter
 
+      - name: Run JMeter Tests
+        run: |
+          # Navigate to your JMeter scripts directory
+          cd jmeter-tests
+          
+          # Run JMeter in non-GUI mode
+          jmeter -n -t Test.jmx -l test-results.jtl
 
-      - name: Upload API Test Results
+      - name: Upload Test Results
         uses: actions/upload-artifact@v2
         with:
-          name: api-test-results
-          path: src/api-test-results.jtl  # Update the path accordingly
-
-        
+          name: jmeter-results
+          path: jmeter-tests/test-results.jtl
+      
       - name: Build and Push Docker Image to Docker Hub
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
@@ -64,5 +66,3 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           platform: linux/amd64
           tags: latest
-
-      
